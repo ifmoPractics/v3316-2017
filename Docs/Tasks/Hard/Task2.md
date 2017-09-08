@@ -1,5 +1,5 @@
 # Тетрис
-## Функционал к 21.08:
+## Функционал к 21.09:
 
 - Четыре из семи фигур:
 ![alt text](http://ringsandcoins.com/wp-content/uploads/2015/09/9Z0oJXe.png)
