@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images"/>
+    <qresource prefix="/">
+        <file>Textures/white.ico</file>
+        <file>style.qss</file>
+    </qresource>
+</RCC>
