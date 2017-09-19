@@ -8,7 +8,7 @@ public:
 	virtual void set(double c1, double c2) = 0;//абстрактный метод=нет определения
 	virtual double getX() = 0;
 	virtual double getY() = 0;
-	virtual ~Coordinates() = default;// надо или нет?
+	virtual ~Coordinates() = default;
 /*если у вас в классе присутствует хотя бы одна виртуальная функция, деструктор также следует сделать виртуальным*/
 };
 
@@ -85,7 +85,7 @@ istream& operator>>(istream& is, Polar& pol)// дружественная функция
 	return is;
 }
 Polar::Polar(double r1, double phi1) {
-	if ((phi1 < 0) && (phi > 360)) {
+	if ((phi1 < 0) || (phi > 360)) {
 		throw 0;
 	}
 	phi = phi1;
@@ -95,14 +95,14 @@ Polar::Polar(double r1, double phi1) {
 
 Decart Polar::convertToDec() {
 	double x, y;
-	x = this->r*cos(this->phi);
-	y = this->r*sin(this->phi);
+	x = r*cos(phi);
+	y = r*sin(phi);
 	return Decart(x, y);
 }
 
 
 void Polar::set(double r1, double phi1) {
-	if ((phi1 < 0) && (phi > 360)) {
+	if ((phi1 < 0) || (phi > 360)) {
 		throw 0;
 	}
 	phi = phi1;
@@ -118,8 +118,8 @@ double Polar::getY() {
 
 Polar Decart::convertToPol() {
 	double r, phi;
-	r =  sqrt(this->x*this->x + this->y*this->y);
-	phi =  atan(this->y / this->x);
+	r =  sqrt(x*x + y*y);
+	phi =  atan(y / x);
 	return Polar(r, phi);
 }
 
@@ -139,6 +139,7 @@ int main()
 	x = y.convertToPol();
 	cout << "Y converted into Polar" << x << endl;
 	cout << x << endl;
+	delete tmp;
 	system("pause");
 	return 0;
 
