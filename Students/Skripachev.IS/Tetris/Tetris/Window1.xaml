@@ -1,0 +1,77 @@
+﻿<Window x:Class="Tetris.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tetris"
+        mc:Ignorable="d"
+        Title="Tetris" Height="639" Width="616" KeyDown="Window_KeyDown" Background="#FF151515" ResizeMode="NoResize" Icon="Resources/Icon.png">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="335*"/>
+            <RowDefinition Height="273*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="canvasMain" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="400" MinHeight="600" Margin="0,0,0,0" Height="600" Width="400"/>
+        <Label x:Name="l_scoreStatic" Content="Score:" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" FontFamily="Showcard Gothic" Margin="18,15,18,0" Grid.Column="1" HorizontalContentAlignment="Center" Height="69" Width="172" Foreground="#FFE7EE5C">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" Color="#FFF0B925" BlurRadius="20"/>
+            </Label.Effect>
+        </Label>
+        <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Height="106" Width="208">
+            <Label x:Name="l_score" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Showcard Gothic" Width="49" HorizontalContentAlignment="Center" Foreground="#FFF7505F">
+                <Label.Effect>
+                    <DropShadowEffect ShadowDepth="0" Color="#FFFF3030" BlurRadius="13"/>
+                </Label.Effect>
+            </Label>
+        </Viewbox>
+        <Image x:Name="NextFigure" Margin="0,140,0,0" MinWidth="190" MinHeight="190" Height="190" Grid.Column="1" Stretch="Fill" Width="190" VerticalAlignment="Top"/>
+        <StackPanel x:Name="p_MainMenu" Grid.Column="1" HorizontalAlignment="Left" Height="253" Margin="18,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172">
+            <Button x:Name="b_NewGame" Click="b_NewGame_Click" Content="New Game" MinHeight="40" FontFamily="Showcard Gothic" Foreground="#FFE8E8E8" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+
+            </Button>
+            <Button x:Name="b_Resume" Content="Continue" Click="b_Resume_Click" Foreground="#FFE8E8E8" MinHeight="40" FontFamily="Showcard Gothic" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="b_Records" Content="Records" Click="b_Records_Click" FontFamily="Showcard Gothic" MinHeight="40" Foreground="#FFE8E8E8" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="b_Exit" Content="Exit" Click="b_Exit_Click" Foreground="#FFE8E8E8" MinHeight="40" FontFamily="Showcard Gothic" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel x:Name="p_GameMenu" Grid.Column="1" HorizontalAlignment="Left" Height="253" Margin="18,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Visibility="Hidden" IsEnabled="False">
+            <Button x:Name="b_Pause" Content="Pause" Click="b_Pause_Click" Foreground="#FFE8E8E8" MinHeight="40" FontFamily="Showcard Gothic" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="b_ToMainMenu" Content="To Main Menu" Click="b_ToMainMenu_Click" Foreground="#FFE8E8E8" MinHeight="40" FontFamily="Showcard Gothic" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel x:Name="p_Records" Grid.Column="1" HorizontalAlignment="Left" Height="253" Margin="18,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Visibility="Hidden" IsEnabled="False">
+            <Label x:Name="l_Records" Content="Label" Foreground="#FFFFFBFB" FontWeight="Bold" FontSize="11" HorizontalContentAlignment="Center"/>
+            <Button x:Name="b_ToMenuFromRec" Content="To Main Menu" Click="b_ToMenuFromRec_Click" Foreground="#FFE8E8E8" MinHeight="40" FontFamily="Showcard Gothic" Style="{StaticResource ButStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/ButtonUp.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
