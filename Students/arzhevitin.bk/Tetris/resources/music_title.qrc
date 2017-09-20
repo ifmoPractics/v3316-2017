@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>misic/title.mp3</file>
+    </qresource>
+</RCC>
