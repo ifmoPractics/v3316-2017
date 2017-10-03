@@ -16,7 +16,7 @@ void SoundController::playMusic(Music type)
     QMediaPlaylist* playlist = new QMediaPlaylist(this);
 
     QString path = QDir::currentPath() + MUSIC_URL[type];
-    playlist->addMedia(QUrl(MUSIC_URL[type]));
+    playlist->addMedia(QUrl(path));
     if (m_enableLoop) {
         playlist->setPlaybackMode(QMediaPlaylist::Loop);
     }
@@ -33,6 +33,11 @@ void SoundController::stopMusic()
 void SoundController::pauseMusic()
 {
     m_palyer.pause();
+}
+
+void SoundController::playCurrentMusic()
+{
+    m_palyer.play();
 }
 
 void SoundController::playSound(Sound type)
