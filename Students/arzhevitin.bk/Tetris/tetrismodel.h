@@ -10,7 +10,7 @@
 
 
 namespace tetrismodel {
-    const int   MAX_TOUCHES_NUMBER      = 3;
+    const int   MAX_TOUCHES_NUMBER      = 2;
     const int   FULL_LINE_POINTS_FACTOR = 10;
     const int   SET_ITEM_FACTOR         = 1;
     const int   SPEED_INCREASE_FACTOR   = 2;
@@ -18,14 +18,14 @@ namespace tetrismodel {
     const int   SPEED                   = 1;
     const int   TO_FIRST_LEVEL_POINTS   = 50;
     const int   TO_NEXT_LEVEL_COEF      = 2;
-    const QSize FIELD_SIZE              = QSize(10,20);
+    const QSize FIELD_SIZE              = QSize(10,25);
 
     enum class FCT /*FieldCellType*/ {
         E, /*=empty*/
         I, J, L, O, S, T, Z,
     };
 
-    using Matrix = QVector< QVector< FCT > >;
+    typedef QVector< QVector< FCT > > Matrix;
 }
 
 ///----------------------------------------------------------------------------
@@ -46,10 +46,6 @@ public:
     void    decTouchCounter();
     tetrismodel::FCT getBlockType(const QPoint &block) const; /// <- Извлечение
                         /// типа блока по внутренним координатам матрицы фигуры
-
-    void setData(tetrismodel::Matrix m, QPoint p, int t);
-    void getData(tetrismodel::Matrix &m, QPoint &p, int &t);
-
 private:    
     TetrisItem(const tetrismodel::Matrix &matrix);
 
@@ -79,16 +75,12 @@ public:
     int              getLevel() const;
     bool             isGameActive() const;
 
-
-    void setData(tetrismodel::Matrix m, TetrisItem ti, int s, int l, bool state);
-    void getData(tetrismodel::Matrix &m, TetrisItem &ti, int &s, int &l, bool &state);
-
 private:
     tetrismodel::Matrix m_fieldMatrix;
     TetrisItem          m_activeItem;
     int                 m_score;
-    int                 m_level;
     bool                m_gameActive;
+    int                 m_level;
 
 private:
     bool hasCollisions(const TetrisItem &item) const;

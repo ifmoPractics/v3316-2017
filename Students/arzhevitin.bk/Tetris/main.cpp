@@ -1,13 +1,11 @@
+#include "tetrisgame.h"
 #include <QApplication>
-#include "tetriscontroller.h"
-
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    TetrisController game;
-    game.startGameTetris();
+    TetrisGame w;
+    w.show();
 
     return a.exec();
 }

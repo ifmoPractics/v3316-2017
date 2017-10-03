@@ -8,14 +8,10 @@
 #include <QTimer>
 #include "soundcontroller.h"
 #include "tetrismodel.h"
-#include "tetriswindow.h"
-
 
 namespace tetriscontroller {
 const int STEP_DELAY = 400; // in milliseconds
 const int STEP_DELAY_MAX = 60; // in milliseconds
-const int STEP_DELAY_NEXT_LEVEL = 30;
-const int REDRAW_TIME = 5;
 }
 
 
@@ -24,16 +20,15 @@ class TetrisController : public QObject
     Q_OBJECT
 
 public:
-    TetrisController(QObject* parent = 0);
+    TetrisController(TetrisModel *tetrisModel, QObject* parent = 0);
 
+signals:
+    void doRefresh();
+    void gameOver();
 
 public slots:
-    void startGameTetris();
-    void saveGame();
-    void loadGame();
-    void records();
-    void startNewgame();
-    void gameOver();
+    void start();
+    void end();
     void pause();
 
     void moveItemleft();
@@ -43,17 +38,9 @@ public slots:
 
 private slots:
     void gameDoStep();
-    void redrawGameField();
 
 private:
-    bool m_isGameActive;
-    void addRecord(int score, int level);
-
-
-private:
-    QTimer          m_gameTimer, m_redrawFieldTimer;
-    TetrisModel     m_tetrisModel;
-    TetrisWindow    m_tetrisWindow;
+    TetrisModel*    m_tetrisModel;
+    QTimer*         m_timer;
     SoundController m_soundController;
-    struct Records { int s1 = 0, l1 = 0, s2 = 0, l2 = 0, s3 = 0, l3 = 0; } m_records;
 };

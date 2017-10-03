@@ -71,20 +71,6 @@ FCT TetrisItem::getBlockType(const QPoint &block) const
     return m_itemMatrix[block.y()][block.x()];
 }
 
-void TetrisItem::setData(Matrix m, QPoint p, int t)
-{
-    m_itemMatrix = m;
-    m_pointOnField = p;
-    m_touchCounter = t;
-}
-
-void TetrisItem::getData(Matrix &m, QPoint &p, int &t)
-{
-    m = m_itemMatrix;
-    p = m_pointOnField;
-    t = m_touchCounter;
-}
-
 int TetrisItem::getSizeBlocks() const
 {
     return m_itemMatrix.size();
@@ -264,24 +250,6 @@ bool TetrisModel::isGameActive() const
     return m_gameActive;
 }
 
-void TetrisModel::setData(Matrix m, TetrisItem ti, int s, int l, bool state)
-{
-    m_fieldMatrix = m;
-    m_activeItem = ti;
-    m_score = s;
-    m_level = l;
-    m_gameActive = state;
-}
-
-void TetrisModel::getData(Matrix &m, TetrisItem &ti, int &s, int &l, bool &state)
-{
-    m = m_fieldMatrix;
-    ti = m_activeItem;
-    s = m_score;
-    l = m_level;
-    state = m_gameActive;
-}
-
 TetrisItem TetrisModel::getActiveItem() const
 {
     return m_activeItem;
@@ -343,7 +311,6 @@ void TetrisModel::doStep()
 
         int newXPos = this->getSizeBlocks().width() / 2;
         int newYPos = m_activeItem.getSizeBlocks() / 2;
-
         m_activeItem.setPosition(QPoint(newXPos, newYPos));
 
         //Если при генерации нового элемента произошла коллизия
