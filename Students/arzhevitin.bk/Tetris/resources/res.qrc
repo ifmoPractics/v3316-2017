@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/back.png</file>
+        <file>img/block_back_field.png</file>
+        <file>img/block_back_title.png</file>
+        <file>img/block_i.png</file>
+        <file>img/block_j.png</file>
+        <file>img/block_l.png</file>
+        <file>img/block_o.png</file>
+        <file>img/block_s.png</file>
+        <file>img/block_t.png</file>
+        <file>img/block_z.png</file>
+        <file>img/bottom_down.png</file>
+        <file>img/bottom_hold.png</file>
+        <file>img/bottom_up.png</file>
+        <file>img/up_field_frame.png</file>
+        <file>img/up_level_frame.png</file>
+        <file>img/up_score_frame.png</file>
+        <file>style.css</file>
+    </qresource>
+</RCC>
