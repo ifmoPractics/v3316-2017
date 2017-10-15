@@ -20,8 +20,8 @@ namespace WindowsGame1
 
         int currentBlockHeight;
         int[,] block;
+        List<int> orderColor; //0-blue, 1-cian, 2-green, 3-orange, 4-purple,5-red,6,yellow
         public int blockColor;
-
 
         public int score;
         int counter;
@@ -34,6 +34,7 @@ namespace WindowsGame1
         Vector2 pos = Vector2.Zero;
         public List<Vector2> blocksPos;
         public List<Vector2> allBlocks;
+        public List<int> allBlocksColor;
 
 
         List<int[,]> order;
@@ -44,9 +45,12 @@ namespace WindowsGame1
             order = new List<int[,]>();
             blocksPos = new List<Vector2>();
             allBlocks = new List<Vector2>();
+            orderColor = new List<int>();
+            allBlocksColor = new List<int>();
             falling = false;
             score = 0;
             level = 0;
+            blockColor = 0;
         }
 
         public void GameOver()
@@ -54,6 +58,8 @@ namespace WindowsGame1
             order.Clear();
             blocksPos.Clear();
             allBlocks.Clear();
+            orderColor.Clear();
+            allBlocksColor.Clear();
             falling = false;
             score = 0;
             level = 0;
@@ -63,7 +69,9 @@ namespace WindowsGame1
         {
             CreateOrder();
             block = order[0];
+            blockColor = orderColor[0];
             order.RemoveAt(0);
+            orderColor.RemoveAt(0);
             currentBlockHeight = block.GetLength(0);
             blocksPos.Clear();
             pos = new Vector2(640, 0);
@@ -87,7 +95,7 @@ namespace WindowsGame1
                 blocksPos[i] = new Vector2(blocksPos[i].X, blocksPos[i].Y + blockSize);
             }
             pos = new Vector2(pos.X, pos.Y + blockSize);
-            if (CheckCollisionVert())
+            if (CheckCollisionVert(blocksPos))
             {
                 for (int i = 0; i < blocksPos.Count; i++)
                 {
@@ -103,10 +111,9 @@ namespace WindowsGame1
         {
             foreach (var bl in blocksPos)
             {
+                allBlocksColor.Add(blockColor);
                 allBlocks.Add(bl);
             }
-
-     
             counter = 0;
             CheckLine();
             Scoring();
@@ -137,19 +144,19 @@ namespace WindowsGame1
 
         void nextLevel()
         {
-            if (level == 0 && score >= 4800) level++;
-            else if (level == 1 && score >= 10800) level++;
-            else if (level == 2 && score >= 22800) level++;
-            else if (level == 3 && score >= 33600) level++;
-            else if (level == 4 && score >= 52800) level++;
-            else if (level == 5 && score >= 68400) level++;
-            else if (level == 6 && score >= 94800) level++;
-            else if (level == 7 && score >= 115200) level++;
-            else if (level == 8 && score >= 148800) level++;
-            else if (level == 9 && score >= 174000) level++;
-            else if (level == 10 && score >= 214800) level++;
-            else if (level == 11 && score >= 244800) level++;
-            else if (level == 12 && score >= 292800) level++;
+            if (level == 0 && score >= 2000) level++;
+            else if (level == 1 && score >= 6800) level++;
+            else if (level == 2 && score >= 12800) level++;
+            else if (level == 3 && score >= 23600) level++;
+            else if (level == 4 && score >= 42800) level++;
+            else if (level == 5 && score >= 58400) level++;
+            else if (level == 6 && score >= 84800) level++;
+            else if (level == 7 && score >= 105200) level++;
+            else if (level == 8 && score >= 138800) level++;
+            else if (level == 9 && score >= 164000) level++;
+            else if (level == 10 && score >= 204800) level++;
+            else if (level == 11 && score >= 234800) level++;
+            else if (level == 12 && score >= 282800) level++;
             else if (level == 13 && score >= 327600) level++;
             else if (level == 14 && score >= 382800) level++;
             else if (level == 15 && score >= 422400) level++;
@@ -165,7 +172,7 @@ namespace WindowsGame1
                     blocksPos[i] = new Vector2(blocksPos[i].X + blockSize, blocksPos[i].Y);
                 }
                 pos = new Vector2(pos.X + blockSize, pos.Y);
-                if (CheckCollisionHor(right))
+                if (CheckCollisionHor(right, blocksPos))
                 {
                     for (int i = 0; i < blocksPos.Count; i++)
                     {
@@ -181,7 +188,7 @@ namespace WindowsGame1
                     blocksPos[i] = new Vector2(blocksPos[i].X - blockSize, blocksPos[i].Y);
                 }
                 pos = new Vector2(pos.X - blockSize, pos.Y);
-                if (CheckCollisionHor(right))
+                if (CheckCollisionHor(right, blocksPos))
                 {
                     for (int i = 0; i < blocksPos.Count; i++)
                     {
@@ -226,79 +233,99 @@ namespace WindowsGame1
                 {
                     if (block[i, j] == 1)
                     {
-                        blocksPos.Add(new Vector2(pos.X+j*blockSize,pos.Y + i* blockSize));
+                        blocksPos.Add(new Vector2(pos.X + j * blockSize, pos.Y + i * blockSize));
                     }
                 }
             }
             if (!AfterRotate())
             {
-                Rotate();
+                ReverseRotate();
             }
 
         }
 
-        
+             public void ReverseRotate()
+             {
+                 int[,] tmp = new int[currentBlockHeight, currentBlockHeight];
+                 for (int i = 0; i < currentBlockHeight; i++)
+                 {
+                     for (int j = 0; j < currentBlockHeight; j++)
+                     {
+                         tmp[j, i] = block[currentBlockHeight - 1 - i, j];
+                     }
+                 }
+                 block = tmp;
+                 blocksPos.Clear();
+                 for (int i = 0; i < currentBlockHeight; i++)
+                 {
+                     for (int j = 0; j < currentBlockHeight; j++)
+                     {
+                         if (block[i, j] == 1)
+                         {
+                             blocksPos.Add(new Vector2(pos.X + j * blockSize, pos.Y + i * blockSize));
+                         }
+                     }
+                 }
 
+                 if (!AfterRotate())
+                 {
+                     Rotate();
+                 }
+             }
         bool AfterRotate()
         {
-            if (CheckCollisionVert())
+            if (CheckCollisionVert(blocksPos))
             {
-            /*    for (int i = 0; i < blocksPos.Count; i++)
+                return false;
+            }
+
+            if (CheckCollisionHor(true, blocksPos) && (CheckCollisionHor(false, blocksPos)))
+            {
+                return false;
+            }
+
+            if (CheckCollisionHor(true, blocksPos))
+            {
+                for (int i = 0; i < blocksPos.Count; i++)
                 {
-                    blocksPos[i] = new Vector2(blocksPos[i].X, blocksPos[i].Y - blockSize);
+                    blocksPos[i] = new Vector2(blocksPos[i].X - blockSize, blocksPos[i].Y);
                 }
-                pos = new Vector2(pos.X, pos.Y - blockSize);
-                */
-                return false;
-            }
-
-            if (CheckCollisionHor(true) && (CheckCollisionHor(false)))
-            {
-                return false;
-            }
-
-                if (CheckCollisionHor(true))
-            {
-                    for (int i = 0; i < blocksPos.Count; i++)
-                    {
-                        blocksPos[i] = new Vector2(blocksPos[i].X - blockSize, blocksPos[i].Y);
-                    }
-                    pos = new Vector2(pos.X - blockSize, pos.Y);
-                    if (CheckCollisionHor(true) || CheckCollisionHor(false))
-                    {
+                pos = new Vector2(pos.X - blockSize, pos.Y);
+                if (CheckCollisionHor(true, blocksPos) || CheckCollisionHor(false, blocksPos))
+                {
                     for (int i = 0; i < blocksPos.Count; i++)
                     {
                         blocksPos[i] = new Vector2(blocksPos[i].X + blockSize, blocksPos[i].Y);
                     }
                     return false;
-                    }
-             return true;
+                }
+                return true;
             }
-            if (CheckCollisionHor(false))
+            if (CheckCollisionHor(false, blocksPos))
             {
+                for (int i = 0; i < blocksPos.Count; i++)
+                {
+                    blocksPos[i] = new Vector2(blocksPos[i].X + blockSize, blocksPos[i].Y);
+                }
+                pos = new Vector2(pos.X + blockSize, pos.Y);
+
+                if (CheckCollisionHor(true, blocksPos) || CheckCollisionHor(false, blocksPos))
+                {
                     for (int i = 0; i < blocksPos.Count; i++)
                     {
-                        blocksPos[i] = new Vector2(blocksPos[i].X + blockSize, blocksPos[i].Y);
+                        blocksPos[i] = new Vector2(blocksPos[i].X - blockSize, blocksPos[i].Y);
                     }
-                    pos = new Vector2(pos.X + blockSize, pos.Y);
-
-                    if (CheckCollisionHor(true) || CheckCollisionHor(false))
-                    {
-                        for (int i = 0; i < blocksPos.Count; i++)
-                        {
-                            blocksPos[i] = new Vector2(blocksPos[i].X - blockSize, blocksPos[i].Y);
-                        }
-                        return false;
-                    }
-                    return true;
+                    return false;
+                }
+                return true;
 
             }
             return true;
         }
 
-        bool CheckCollisionHor(bool dir)
+        bool CheckCollisionHor(bool dir, List<Vector2> chBlock)
         {
-            foreach (var bl in blocksPos)
+            foreach (var bl in chBlock)
             {
                 if (bl.X< offset && !dir || bl.X + blockSize > width * blockSize +offset && dir)
                 {
@@ -315,18 +342,18 @@ namespace WindowsGame1
             return false;
         }
 
-        bool CheckCollisionVert()
+        bool CheckCollisionVert(List<Vector2> chBlock)
         {
-            for (int i = 0; i < blocksPos.Count; i++)
+            for (int i = 0; i < chBlock.Count; i++)
             {
                 foreach (var abl in allBlocks)
                 {
-                    if (blocksPos[i].Y == abl.Y && blocksPos[i].X == abl.X)
+                    if (chBlock[i].Y == abl.Y && chBlock[i].X == abl.X)
                     {              
                         return true;
                     }
                 }
-                if (blocksPos[i].Y == height*blockSize)
+                if (chBlock[i].Y == height*blockSize)
                 {
                     return true;
                 }
@@ -405,14 +432,18 @@ namespace WindowsGame1
         void RemoveLine(float l)
         {
             List<Vector2> tmp = new List<Vector2>();
-            foreach (var item in allBlocks)
+            List<int> tmpc = new List<int>();
+            int x = 0;
+            for (int i = 0; i < allBlocks.Count; i++)
             {
-                if (item.Y != l)
+                if (allBlocks[i].Y != l)
                 {
-                    tmp.Add(item);
+                    tmpc.Add(allBlocksColor[i]);
+                    tmp.Add(allBlocks[i]);
                 }
             }
             allBlocks = tmp;
+            allBlocksColor = tmpc;
             for (int i = 0; i < allBlocks.Count; i++)
             {
                     if (allBlocks[i].Y < l)
@@ -425,13 +456,17 @@ namespace WindowsGame1
         void CreateOrder()
         {
             Random rnd = new Random();
+            int x = 0;
             if (order.Count <= 1)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    order.Add(blocks.pieces[rnd.Next(blocks.pieces.Count)]);
+                    x = rnd.Next(blocks.pieces.Count);
+                    order.Add(blocks.pieces[x]);
+                    orderColor.Add(x);
                 }
                 order.Add(blocks.pieces[0]);
+                orderColor.Add(0);
 
             }
         }

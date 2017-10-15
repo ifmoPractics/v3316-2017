@@ -22,6 +22,7 @@ namespace WindowsGame1
         Board board = new Board();
         Texture2D t;
         Texture2D sprite;
+        Texture2D[] sprites;
         SpriteFont font;
         SpriteFont font2;
         Song song;
@@ -86,6 +87,15 @@ namespace WindowsGame1
              for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
              t.SetData(data);
             //sprite = Texture2D.FromStream(GraphicsDevice, File.OpenRead("red"));
+            sprites = new Texture2D[7];
+            sprites[0] = Content.Load<Texture2D>("blue");
+            sprites[1] = Content.Load<Texture2D>("cian");
+            sprites[2] = Content.Load<Texture2D>("green");
+            sprites[3] = Content.Load<Texture2D>("orange");
+            sprites[4] = Content.Load<Texture2D>("purple");
+            sprites[5] = Content.Load<Texture2D>("red");
+            sprites[6] = Content.Load<Texture2D>("yellow");
+
             sprite = Content.Load<Texture2D>("red");
              font = Content.Load<SpriteFont>("Font");
              song = Content.Load<Song>("Song");
@@ -200,7 +210,7 @@ namespace WindowsGame1
                     MediaPlayer.Stop();
                 }
 
-                if (kState.IsKeyUp(Keys.Z))
+                if (kState.IsKeyUp(Keys.Z) && kState.IsKeyUp(Keys.X))
                 {
                     rotate = true;
                 }
@@ -208,6 +218,19 @@ namespace WindowsGame1
                 {
                     board.Rotate();
                     rotate = false;
+                    if (!board.isFalling())
+                    {
+                        Time = 0;
+                    }
+                }
+                if (kState.IsKeyDown(Keys.X) && rotate)
+                {
+                    board.ReverseRotate();
+                    rotate = false;
+                    if (!board.isFalling())
+                    {
+                        Time = 0;
+                    }
                 }
 
                 if (kState.IsKeyUp(Keys.Up))
@@ -237,6 +260,15 @@ namespace WindowsGame1
                         board.Movement(false);
                     }
                     KeyElapsed = 0;
+                }
+
+                if (!board.isFalling())
+                {
+                    if (board.blocksPos.Count > 0)
+                    {
+                        board.FreeSpace();
+                        Time = 0;
+                    }
                 }
 
                 if (!board.isFalling())
@@ -339,14 +371,17 @@ namespace WindowsGame1
             {
                 spriteBatch.Draw(gBack, new Vector2(0, 0), Color.White);
 
-
+                int x = 0;
                 foreach (var item in board.allBlocks)
                 {
-                    spriteBatch.Draw(sprite, new Vector2(item.X, item.Y), Color.White);
+                   // spriteBatch.Draw(sprite, new Vector2(item.X, item.Y), Color.White);
+                    spriteBatch.Draw(sprites[board.allBlocksColor[x]], new Vector2(item.X, item.Y), Color.White);
+                    x++;
                 }
                 foreach (var item in board.blocksPos)
                 {
-                    spriteBatch.Draw(sprite, new Vector2(item.X, item.Y), Color.White);
+                    //   spriteBatch.Draw(sprites[board.orderColor[0]], new Vector2(item.X, item.Y), Color.White);
+                    spriteBatch.Draw(sprites[board.blockColor], new Vector2(item.X, item.Y), Color.White);
                 }
                 spriteBatch.DrawString(font, board.score.ToString(), new Vector2(980 - font.MeasureString(board.score.ToString()).X/2, 140 - font.MeasureString(board.score.ToString()).Y / 2), Color.Black);
                 spriteBatch.DrawString(font, board.level.ToString(), new Vector2(330 - font.MeasureString(board.level.ToString()).X / 2, 140- font.MeasureString(board.level.ToString()).Y /2), Color.Black);
