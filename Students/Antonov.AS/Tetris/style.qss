@@ -1,0 +1,49 @@
+QPushButton {
+color: #333;
+border: 2px solid #555;
+border-radius: 11px;
+padding: 5px;
+background: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #eef, stop: 1 #ccf);
+min-width: 80px;
+
+}
+
+GamePage, MenuPage, ScorePage, SaveRecordDialog{
+background: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #bff, stop: 1 #fbf);
+}
+
+QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
+}
+
+QPushButton:disabled {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #bbb, stop: 1 #777);
+}
+
+QPushButton:pressed {
+background: qradialgradient(cx: 0.4, cy: -0.1,
+fx: 0.4, fy: -0.1,
+radius: 1.35, stop: 0 #fff, stop: 1 #ddd);
+}
+
+QFrame {
+border-style: solid;
+border-width: 1px;
+border-radius: 100px;
+min-width: 10em;
+background-clip: padding;
+background-origin: content;
+}
+
+QLabel {
+font-weight: bold;
+font-size: 15px;
+border-width: 0px;
+}
+
+
+
