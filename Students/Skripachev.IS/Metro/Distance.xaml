@@ -1,0 +1,24 @@
+﻿<Window x:Class="Metro.Distance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Metro"
+        mc:Ignorable="d"
+        Title="Distance" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="Window_Closing" Background="#FF3E3E3E">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="t_dis" Foreground="#FFF9F6F6">Введите расстояние между станциями:</TextBlock>
+        <TextBox Name="t_distance" MinWidth="250" Grid.Row="1" TextChanged="t_distance_TextChanged" Background="#FFA8A8A8"/>
+
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Name="b_ok" IsDefault="True" Margin="0,0,0
+                    ,0" MinWidth="60" Click="b_ok_Click" IsEnabled="False">OK</Button>
+        </WrapPanel>
+    </Grid>
+</Window>
