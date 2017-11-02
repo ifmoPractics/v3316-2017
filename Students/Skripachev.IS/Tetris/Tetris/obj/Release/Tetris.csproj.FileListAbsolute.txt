@@ -1,0 +1,16 @@
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\bin\Release\Tetris.exe.config
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\bin\Release\Tetris.exe
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\bin\Release\Tetris.pdb
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\App.g.cs
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris_MarkupCompile.cache
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris_MarkupCompile.lref
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.g.resources
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.Properties.Resources.resources
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.csproj.GenerateResource.Cache
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.exe
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.pdb
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Tetris.Resource1.resources
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Window1.g.cs
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\App.baml
+C:\Users\Иван\Desktop\Projects\C#\Tetris\Tetris\Tetris\obj\Release\Window1.baml
