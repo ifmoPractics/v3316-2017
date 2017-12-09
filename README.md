@@ -20,3 +20,4 @@
 - Исправлены указанные преподавателем недочёты
 
 ![alt text](https://cdn-images-1.medium.com/max/465/1*BHN1sCwtylPmj9ZdQvYgMg.png)
+
