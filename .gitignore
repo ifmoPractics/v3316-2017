@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+## Ignore Visual Studio
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
